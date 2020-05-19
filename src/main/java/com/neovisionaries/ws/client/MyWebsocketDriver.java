@@ -148,7 +148,7 @@ public class MyWebsocketDriver {
 					}
 				});
 		
-				/*
+
 		try {
 			ws.connect();
 			
@@ -220,7 +220,7 @@ public class MyWebsocketDriver {
 			System.out.println("WebSocket Exception.");
 			System.err.println(e2);
 		}
-		*/
+		
 
 	}
 
