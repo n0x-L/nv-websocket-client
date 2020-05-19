@@ -23,7 +23,7 @@ public class MyWebsocketDriver {
 		ProxySettings settings = factory.getProxySettings();
 		
 		// Set a proxy server
-		
+		settings.setServerName("inputstreamreader.link");
 		
 		// Create the URI
 		URI myUri = new URI("ws", "inputstreamreader.link", "/ws/", "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
@@ -45,7 +45,7 @@ public class MyWebsocketDriver {
 		w.buildRequestLine();
 		
 		// Test - check request line
-		System.out.println(w.buildRequestLine());
+		//System.out.println(w.buildRequestLine());
 		
 		// Test - Check headers
 		/*
@@ -58,6 +58,12 @@ public class MyWebsocketDriver {
 			
 		}
 		*/
+		
+		w.buildHeaders();
+		
+		
+		
+		//System.out.println(ws.getURI());
 		
 		FileOutputStream outputStream = new FileOutputStream("logs");
 		
@@ -142,7 +148,7 @@ public class MyWebsocketDriver {
 					}
 				});
 		
-
+				/*
 		try {
 			ws.connect();
 			
@@ -214,6 +220,7 @@ public class MyWebsocketDriver {
 			System.out.println("WebSocket Exception.");
 			System.err.println(e2);
 		}
+		*/
 
 	}
 
