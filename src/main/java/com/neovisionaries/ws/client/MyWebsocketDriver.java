@@ -42,8 +42,8 @@ public class MyWebsocketDriver {
 		
 		HandshakeBuilder w = ws.getHandshakeBuilder();
 		w.setKey("9C0NW9PV5PWTWKanBlLsLw==");
-		w.buildRequestLine();
-		w.buildHeaders();
+		//w.buildRequestLine();
+		//w.buildHeaders();
 		
 		// Test - check request line
 		//System.out.println(w.buildRequestLine());
