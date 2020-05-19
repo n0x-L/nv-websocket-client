@@ -1,33 +1,48 @@
 package com.neovisionaries.ws.client;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
 public class MyWebsocketDriver {
-	
-	String serverAddress = "wss://echo.websocket.org/";
-	int serverPort = 8888;
-	
-	private static final int timeout = 5000;
 
 	public static void main(String[] args) throws Exception {
 		
-		//ProxySettings settings = factory.getProxySettings();
+		// Create a WebSocketFactory instance
+		WebSocketFactory factory = new WebSocketFactory();
+		
+		// Set a server name for SNI (Server Name Indication)
+		//factory.setServerName("inputstreamreader.link");
+		
+		// Get the associated ProxySettings instance
+		ProxySettings settings = factory.getProxySettings();
+		
+		// Create a WebSocket. The scheme part can be one of:
+		// 'ws', 'wss', 'http', and 'https'
+		//WebSocket ws = new WebSocketFactory().createSocket("ws://inputstreamreader.link", 5000);
 		WebSocket ws = new WebSocketFactory().createSocket("wss://echo.websocket.org/", 5000);
 		
 		
 		// Set up websocket protocol
 		//ws.addProtocol("101 Switching Protocols");
 		
+		FileOutputStream outputStream = new FileOutputStream("logs.txt");
 		
 		
 		// Register a listener to receive WebSocket events
 		ws.addListener(new WebSocketAdapter() {
 			public void onTextMessage(WebSocket websocket, String message) throws Exception {
-				System.out.println(message);
+				//System.out.println(message);
+				// Write the incoming data to the file
+				byte b[] = message.getBytes();
+				outputStream.write(b);
+				outputStream.write("\n".getBytes());
+				
+				
 			}
 		});
 		
@@ -50,6 +65,7 @@ public class MyWebsocketDriver {
 			//ws.sendText("my test.");
 			
 			ws.disconnect();
+			outputStream.close();
 			
 		}
 		
