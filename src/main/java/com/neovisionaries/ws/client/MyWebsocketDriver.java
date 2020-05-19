@@ -17,16 +17,16 @@ public class MyWebsocketDriver {
 		WebSocketFactory factory = new WebSocketFactory();
 		
 		// Set a server name for SNI (Server Name Indication)
-		factory.setServerName("inputstreamreader.link");
+		
 		
 		// Get the associated ProxySettings instance
 		ProxySettings settings = factory.getProxySettings();
 		
 		// Set a proxy server
-		settings.setServerName("inputstreamreader.link");
+		
 		
 		// Create the URI
-		URI myUri = new URI("ws", null, "inputstreamreader.link", -1,  "/ws/", "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
+		
 		
 		//String sURI = myUri.toString();
 		
@@ -36,20 +36,18 @@ public class MyWebsocketDriver {
 		//WebSocket ws = new WebSocketFactory().createSocket("wss://echo.websocket.org/", 5000);
 		WebSocket ws = new WebSocketFactory().createSocket(myUri, 5000);
 		
-		// /ws/?bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194
-		
 		
 		
 		HandshakeBuilder w = ws.getHandshakeBuilder();
-		w.setKey("9C0NW9PV5PWTWKanBlLsLw==");
+		
 		//w.buildRequestLine();
 		//w.buildHeaders();
 		
 		// Test - check request line
-		//System.out.println(w.buildRequestLine());
+		System.out.println(w.buildRequestLine());
 		
 		// Test - Check headers
-		/*
+		
 		for(int i = 0; i < w.buildHeaders().size(); i++) {
 			
 			String[] f = w.buildHeaders().get(i);
@@ -58,7 +56,8 @@ public class MyWebsocketDriver {
 			}
 			
 		}
-		*/
+		
+		
 		
 		
 		
@@ -150,7 +149,7 @@ public class MyWebsocketDriver {
 					}
 				});
 		
-
+/*
 		try {
 			ws.connect();
 			
@@ -222,7 +221,7 @@ public class MyWebsocketDriver {
 			System.out.println("WebSocket Exception.");
 			System.err.println(e2);
 		}
-		
+		*/
 
 	}
 
