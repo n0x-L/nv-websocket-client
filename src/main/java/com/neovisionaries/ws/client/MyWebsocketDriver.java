@@ -35,6 +35,9 @@ public class MyWebsocketDriver {
 		
 		// /ws/?bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194
 		
+		ws.addHeader("Connection", "Upgrade");
+		ws.addHeader("Upgrade", "websocket");
+		
 		
 		FileOutputStream outputStream = new FileOutputStream("logs.txt");
 		
@@ -52,6 +55,73 @@ public class MyWebsocketDriver {
 			}
 		});
 		
+		// Register a listener to receive WebSocket events
+				ws.addListener(new WebSocketAdapter() {
+					public void onTextMessage(WebSocket websocket, byte[] data) throws Exception {
+						//System.out.println(message);
+						// Write the incoming data to the file
+						
+						outputStream.write(data);
+						outputStream.write("\n".getBytes());
+						
+						
+					}
+				});
+		
+		// Register a listener to receive WebSocket events
+				ws.addListener(new WebSocketAdapter() {
+					public void onFrame(WebSocket websocket, WebSocketFrame message) throws Exception {
+						//System.out.println(message);
+						// Write the incoming data to the file
+						byte b[] = message.getPayload();
+						outputStream.write(b);
+						outputStream.write("\n".getBytes());
+						
+						
+					}
+				});
+		
+		// Register a listener to receive WebSocket events
+				ws.addListener(new WebSocketAdapter() {
+					public void onContinuationFrame(WebSocket websocket, WebSocketFrame message) throws Exception {
+						//System.out.println(message);
+						// Write the incoming data to the file
+						byte b[] = message.getPayload();
+						outputStream.write(b);
+						outputStream.write("\n".getBytes());
+						
+						
+					}
+				});
+				
+		// Register a listener to receive WebSocket events
+				ws.addListener(new WebSocketAdapter() {
+					public void onBinaryFrame(WebSocket websocket, WebSocketFrame message) throws Exception {
+						//System.out.println(message);
+						// Write the incoming data to the file
+						byte b[] = message.getPayload();
+						outputStream.write(b);
+						outputStream.write("\n".getBytes());
+						
+						
+					}
+				});
+				
+				
+				
+		// Register a listener to receive WebSocket events
+				ws.addListener(new WebSocketAdapter() {
+					public void onCloseFrame(WebSocket websocket, WebSocketFrame message) throws Exception {
+						//System.out.println(message);
+						// Write the incoming data to the file
+						byte b[] = message.getPayload();
+						outputStream.write(b);
+						outputStream.write("\n".getBytes());
+						
+						
+					}
+				});
+				
 		try {
 			ws.connect();
 			System.out.println(ws.isOpen());
@@ -66,9 +136,9 @@ public class MyWebsocketDriver {
 					break;
 				}
 				
-				ws.sendText(text);
+				//ws.sendText(text);
 			}
-			//ws.sendText("my test.");
+			
 			
 			ws.disconnect();
 			outputStream.close();
@@ -77,6 +147,7 @@ public class MyWebsocketDriver {
 		
 		catch (OpeningHandshakeException e)
 		{
+			System.out.println("Opening Handshake Exception thrown");
 			// Status line.
 		    StatusLine sl = e.getStatusLine();
 		    System.out.println("=== Status Line ===");
@@ -116,6 +187,7 @@ public class MyWebsocketDriver {
 		}
 		catch (WebSocketException e2)
 		{
+			System.out.println("WebSocket Exception.");
 			System.err.println(e2);
 		}
 	}
