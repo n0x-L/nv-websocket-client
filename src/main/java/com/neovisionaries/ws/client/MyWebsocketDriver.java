@@ -26,7 +26,7 @@ public class MyWebsocketDriver {
 		settings.setServerName("inputstreamreader.link");
 		
 		// Create the URI
-		URI myUri = new URI("ws", "inputstreamreader.link", "/ws/", "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
+		URI myUri = new URI("ws", null, "inputstreamreader.link", -1,  "/ws/", "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
 		
 		//String sURI = myUri.toString();
 		
@@ -43,6 +43,7 @@ public class MyWebsocketDriver {
 		HandshakeBuilder w = ws.getHandshakeBuilder();
 		w.setKey("9C0NW9PV5PWTWKanBlLsLw==");
 		w.buildRequestLine();
+		w.buildHeaders();
 		
 		// Test - check request line
 		//System.out.println(w.buildRequestLine());
@@ -59,11 +60,12 @@ public class MyWebsocketDriver {
 		}
 		*/
 		
-		w.buildHeaders();
+		
 		
 		
 		
 		//System.out.println(ws.getURI());
+		
 		
 		FileOutputStream outputStream = new FileOutputStream("logs");
 		
