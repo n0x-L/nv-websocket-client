@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +22,19 @@ public class MyWebsocketDriver {
 		// Get the associated ProxySettings instance
 		ProxySettings settings = factory.getProxySettings();
 		
+		// Create the URI
+		URI myUri = new URI("ws", null, "inputstreamreader.link", -1, null, "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
+		
+		//String sURI = myUri.toString();
+		
 		// Create a WebSocket. The scheme part can be one of:
 		// 'ws', 'wss', 'http', and 'https'
 		//WebSocket ws = new WebSocketFactory().createSocket("ws://inputstreamreader.link", 5000);
-		WebSocket ws = new WebSocketFactory().createSocket("wss://echo.websocket.org/", 5000);
+		//WebSocket ws = new WebSocketFactory().createSocket("wss://echo.websocket.org/", 5000);
+		WebSocket ws = new WebSocketFactory().createSocket(myUri, 5000);
 		
+		// /ws/?bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194
 		
-		// Set up websocket protocol
-		//ws.addProtocol("101 Switching Protocols");
 		
 		FileOutputStream outputStream = new FileOutputStream("logs.txt");
 		
