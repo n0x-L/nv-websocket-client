@@ -17,13 +17,16 @@ public class MyWebsocketDriver {
 		WebSocketFactory factory = new WebSocketFactory();
 		
 		// Set a server name for SNI (Server Name Indication)
-		//factory.setServerName("inputstreamreader.link");
+		factory.setServerName("inputstreamreader.link");
 		
 		// Get the associated ProxySettings instance
 		ProxySettings settings = factory.getProxySettings();
 		
+		// Set a proxy server
+		
+		
 		// Create the URI
-		URI myUri = new URI("ws", null, "inputstreamreader.link", -1, null, "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
+		URI myUri = new URI("ws", "inputstreamreader.link", "/ws/", "bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194", null);
 		
 		//String sURI = myUri.toString();
 		
@@ -35,11 +38,28 @@ public class MyWebsocketDriver {
 		
 		// /ws/?bid=d02&uid=b287ba6c22e0f5e8&cid=1511437892427254210194
 		
-		ws.addHeader("Connection", "Upgrade");
-		ws.addHeader("Upgrade", "websocket");
 		
 		
-		FileOutputStream outputStream = new FileOutputStream("logs.txt");
+		HandshakeBuilder w = ws.getHandshakeBuilder();
+		w.setKey("9C0NW9PV5PWTWKanBlLsLw==");
+		w.buildRequestLine();
+		
+		// Test - check request line
+		System.out.println(w.buildRequestLine());
+		
+		// Test - Check headers
+		/*
+		for(int i = 0; i < w.buildHeaders().size(); i++) {
+			
+			String[] f = w.buildHeaders().get(i);
+			for(int j = 0; j < f.length; j++) {
+				System.out.println(f[j]);
+			}
+			
+		}
+		*/
+		
+		FileOutputStream outputStream = new FileOutputStream("logs");
 		
 		
 		// Register a listener to receive WebSocket events
@@ -121,10 +141,11 @@ public class MyWebsocketDriver {
 						
 					}
 				});
-				
+		
+
 		try {
 			ws.connect();
-			System.out.println(ws.isOpen());
+			
 			BufferedReader in = getInput();
 			
 			String text;
@@ -193,6 +214,7 @@ public class MyWebsocketDriver {
 			System.out.println("WebSocket Exception.");
 			System.err.println(e2);
 		}
+
 	}
 
 	
