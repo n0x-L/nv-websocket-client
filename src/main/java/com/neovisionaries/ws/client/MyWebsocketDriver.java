@@ -148,6 +148,9 @@ public class MyWebsocketDriver {
 		catch (OpeningHandshakeException e)
 		{
 			System.out.println("Opening Handshake Exception thrown");
+			
+			System.out.println(e);
+			
 			// Status line.
 		    StatusLine sl = e.getStatusLine();
 		    System.out.println("=== Status Line ===");
